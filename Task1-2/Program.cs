@@ -8,13 +8,15 @@
 // 32679 -> 6
 double num1 = 0;
 int Pos = 0;
-double i = 6; //определяет количество разрядов числа!
+int n = 6;
+
 
 // ***************************Метод выдаёт цифру на определённой позиции в числе**********************
 // выдает -1 если в этой позиции ничего нет
 
 int PosInNum(double number, int position)
 {
+    double i = 6; //определяет количество разрядов числа!
     int CurrentPosition = 0;
     int CurrentPosNumber = 0;
     i = i - 1; // делить начнём с 10 в степени i-1
@@ -25,9 +27,10 @@ int PosInNum(double number, int position)
         if (position > 1) CurrentPosNumber = -1; // если изначально ввели однозначное число, а разряд хотят получить отличный от 1
         return CurrentPosNumber;
     }
-   
+
     while (i > 0)
     {
+
         if (number / Math.Pow(10, i) > 1)
         {
             Console.WriteLine("number / Math.Pow(10, i) > 1 !!!");
@@ -50,7 +53,25 @@ int PosInNum(double number, int position)
         }
         i = i - 1;
         Console.WriteLine("Уходим на след круг цикла   Число: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber + " n/10powI  " + Convert.ToInt32(Math.Truncate(number % Math.Pow(10, i))) + " число на этой позиции: " + CurrentPosNumber);
+        if (i == 0)
+        {
+             CurrentPosition++;
+            // Console.WriteLine("CurrentPosition++;" + CurrentPosition);
+            // Console.WriteLine("now position  is " + CurrentPosition);
+            CurrentPosNumber = number;
 
+            if (CurrentPosition<position)
+            {
+                CurrentPosNumber=-1;
+                Console.WriteLine("CurrentPosition<position");
+                return CurrentPosNumber;
+                
+
+            } 
+            CurrentPosNumber = Convert.ToInt32(number);
+            return CurrentPosNumber;
+            Console.WriteLine("i=0!");
+        }
 
     }
     Console.WriteLine("перед  выходом: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber);
@@ -63,17 +84,17 @@ int PosInNum(double number, int position)
 
 while (num1 <= 0 || num1 > 1000000) //ПРОВЕРКА КОРРЕКТНОСТИ ВВОДА
 {
-    Console.Write("Введите число от 1 до " + (Math.Pow(10, i) - 1) + ": ");
+    Console.Write("Введите число от 1 до " + (Math.Pow(10, n) - 1) + ": ");
     num1 = Double.Parse(Console.ReadLine());
-    if (num1 <= 0 || num1 > (Math.Pow(10, i + 1) - 1)) Console.WriteLine("Неверное число!");
+    if (num1 <= 0 || num1 > (Math.Pow(10, n) - 1)) Console.WriteLine("Неверное число!");
 }
 Console.WriteLine();
 
-while (Pos <= 0 || Pos > i) //ПРОВЕРКА КОРРЕКТНОСТИ ВВОДА
+while (Pos <= 0 || Pos > n) //ПРОВЕРКА КОРРЕКТНОСТИ ВВОДА
 {
-    Console.Write("Введите позицию в числе для вывода от 1 до " + i + ": ");
+    Console.Write("Введите позицию в числе для вывода от 1 до " + n + ": ");
     Pos = int.Parse(Console.ReadLine());
-    if (Pos <= 0 || Pos > i) Console.WriteLine("Неверное число!");
+    if (Pos <= 0 || Pos > n) Console.WriteLine("Неверное число!");
 }
 
 
