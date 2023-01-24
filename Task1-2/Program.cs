@@ -9,6 +9,7 @@
 double num1 = 0;
 int Pos = 0;
 int n = 6; // размерность числа по количеству разрядов
+double result =0;
 
 
 // ***************************Метод выдаёт цифру на определённой позиции в числе**********************
@@ -33,40 +34,27 @@ int PosInNum(double number, int position, double i) // i - определяет 
 
         if (number / Math.Pow(10, i) > 1)
         {
-            // Console.WriteLine("number / Math.Pow(10, i) > 1 !!!");
-            // Console.WriteLine("Число: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber + " n/10powI  " + Convert.ToInt32(Math.Truncate(number % Math.Pow(10, i))) + " число на этой позиции: " + CurrentPosNumber);
-
-            CurrentPosition++;
-            // Console.WriteLine("CurrentPosition++;" + CurrentPosition);
-            // Console.WriteLine("now position  is " + CurrentPosition);
-            CurrentPosNumber = Convert.ToInt32(Math.Truncate(number / Math.Pow(10, i)));
-            // Console.WriteLine("currentPosNumber is " + CurrentPosNumber);
+           CurrentPosition++;
+           CurrentPosNumber = Convert.ToInt32(Math.Truncate(number / Math.Pow(10, i)));
 
             if (CurrentPosition == position)
             {
-                // Console.WriteLine("Приехал к нужной позиции!");
-                // Console.WriteLine("Число: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber + " n/10powI  " + Convert.ToInt32(Math.Truncate(number % Math.Pow(10, i))) + " число на этой позиции: " + CurrentPosNumber);
                 return CurrentPosNumber;
             }
 
             number = number % Math.Pow(10, i);
         }
         i = i - 1;
-        // Console.WriteLine("Уходим на след круг цикла   Число: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber + " n/10powI  " + Convert.ToInt32(Math.Truncate(number % Math.Pow(10, i))) + " число на этой позиции: " + CurrentPosNumber);
+
         if (i == 0)
         {
             CurrentPosition++;
-            // Console.WriteLine("CurrentPosition++;" + CurrentPosition);
-            // Console.WriteLine("now position  is " + CurrentPosition);
             CurrentPosNumber = Convert.ToInt32(Math.Truncate(number / Math.Pow(10, i)));
 
             if (CurrentPosition < position)
             {
                 CurrentPosNumber = -1;
-                // Console.WriteLine("CurrentPosition<position");
                 return CurrentPosNumber;
-
-
             }
             CurrentPosNumber = Convert.ToInt32(number);
             return CurrentPosNumber;
@@ -74,12 +62,13 @@ int PosInNum(double number, int position, double i) // i - определяет 
         }
 
     }
-    // Console.WriteLine("перед  выходом: " + number + " i= " + i + "  position =  " + CurrentPosition + " цифра: " + CurrentPosNumber);
+
     return CurrentPosNumber;
 
 }
 
 // *****************************************Основная программа***********************************************************
+
 
 while (num1 <= 0 || num1 > 1000000) //ПРОВЕРКА КОРРЕКТНОСТИ ВВОДА
 {
@@ -95,8 +84,14 @@ while (Pos <= 0 || Pos > n) //ПРОВЕРКА КОРРЕКТНОСТИ ВВОД
     if (Pos <= 0 || Pos > n) Console.WriteLine("Неверное число!");
 }
 
-Console.WriteLine();
-if (PosInNum(num1, Pos, n) > 0)
-    Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " стоит цифра " + PosInNum(num1, Pos, n));
+result = PosInNum(num1, Pos, n);
+if (result > 0)
+    Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " стоит цифра " + result);
 else
-    Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " ничего нет");
+    Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " ничего нет"); 
+
+// Console.WriteLine();
+// if (PosInNum(num1, Pos, n) > 0)
+//     Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " стоит цифра " + PosInNum(num1, Pos, n));
+// else
+//     Console.WriteLine("На позиции " + Pos + " в числе " + num1 + " ничего нет");
